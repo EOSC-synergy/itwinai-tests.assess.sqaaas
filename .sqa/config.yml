@@ -1,0 +1,82 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: feature/Ophidia
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/r-sarma/itwinai-tests:
+      branch: main
+      repo: https://github.com/r-sarma/itwinai-tests
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/r-sarma/itwinai-tests git:
+        commands:
+        - /usr/bin/env sh .sqa/script.slimy-russet-lion.sh
+        container: qc.acc_slaphappy-cinnabar-mandrill
+  QC.Doc:
+    repos:
+      github.com/r-sarma/itwinai-tests find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.goopy-cornflower-octopus.sh
+        container: qc.doc_skimpy-emerald-flounder
+      github.com/r-sarma/itwinai-tests git:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaggy-tomato-spaniel.sh
+        container: qc.doc_grumpy-red-chihuahua
+      github.com/r-sarma/itwinai-tests markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.seedy-fuchsia-skunk.sh
+        container: qc.doc_sleazy-tomato-hare
+      github.com/r-sarma/itwinai-tests restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.geeky-tangerine-impala.sh
+        container: qc.doc_frumpy-celadon-cuttlefish
+  QC.Lic:
+    repos:
+      github.com/r-sarma/itwinai-tests licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.sickly-ecru-anteater.sh
+        container: qc.lic_homely-plum-meerkat
+  QC.Met:
+    repos:
+      github.com/r-sarma/itwinai-tests cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.woolly-tan-paradise.sh
+        container: qc.met_stuffy-chartreuse-dodo
+  QC.Sec:
+    repos:
+      github.com/r-sarma/itwinai-tests bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.sickly-cinnabar-bandicoot.sh
+        container: qc.sec_crappy-amaranth-manatee
+  QC.Sty:
+    repos:
+      github.com/r-sarma/itwinai-tests flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.stealthy-buff-snake.sh
+        container: qc.sty_cloudy-cream-frog
+      github.com/r-sarma/itwinai-tests hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.randy-denim-setter.sh
+        container: qc.sty_flimsy-plum-terrier
+      github.com/r-sarma/itwinai-tests jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.woozy-aquamarine-ferret.sh
+        container: qc.sty_breezy-carmine-slug
+  QC.Uni:
+    repos:
+      github.com/r-sarma/itwinai-tests commands:
+        commands:
+        - /usr/bin/env sh .sqa/script.homey-crimson-guppy.sh
+        container: qc.uni_stuffy-olivine-dachsbracke
+  QC.Ver:
+    repos:
+      github.com/r-sarma/itwinai-tests get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.leaky-cream-leopard.sh
+        container: qc.ver_wheezy-jade-tamarin
+timeout: 5400
